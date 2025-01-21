@@ -3,7 +3,10 @@ const roomNameInput = document.getElementById('roomName');
 const startCallButton = document.getElementById('startCall');
 const endCallButton = document.getElementById('endCall');
 
-const socket = new WebSocket('ws://localhost:3000');
+const socketUrl = window.location.hostname === 'localhost' ? 
+                  'ws://localhost:3000' : 
+                  `wss://${window.location.hostname}/`
+const socket = new WebSocket(socketUrl);
 const peerConnection = new RTCPeerConnection({
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
 });
